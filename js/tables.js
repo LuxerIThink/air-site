@@ -1,8 +1,18 @@
 var isheader = 0;
 
-window.onload = function() {
-
-};
+function getData() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'link');
+    xhr.onload = function() {
+        if (xhr.status === 100) {
+            const data = JSON.parse(xhr.response)
+            console.log(data)
+            addData2Table(data)
+        } else {
+            console.error(xhr.response);
+        }
+    };
+}
 
 function addData2Table(data) {
     if (isheader === 0) {
@@ -12,31 +22,33 @@ function addData2Table(data) {
 }
 
 function generateHeader(data) {
-    var parentElement = document.getElementById("empty");
-    parentElement.innerHTML = `<table id="table" class="table text-center mt-3"></table>` + parentElement.innerHTML;
-    var table = document.getElementById("table");
-    var header = table.createTHead();
-    var hrow = header.insertRow(0);
+    const parentElement = document.getElementById('empty');
+    const table = document.createElement('table');
+    table.id = 'table';
+    table.classList.add('table', 'text-center', 'mt-3');
+    parentElement.appendChild(table);
+    const header = table.createTHead();
+    const hrow = header.insertRow(0);
     for (var key in data[0]) {
-        var cell = hrow.insertCell(-1);
+        let cell = hrow.insertCell(-1);
         cell.innerHTML = key;
         cell.setAttribute('scope', 'col');
         cell.style.fontWeight = 'bold';
     }
-    var tbody = table.createTBody()
+    const tbody = table.createTBody()
     tbody.id = "inner-table"
     isheader = 1;
 }
 
 function addRow(data) {
-    var tbody = document.getElementById("inner-table");
-    let row = tbody.insertRow(-1);
-    for (let i = 0; i < data.length; i++) {
-        let row = tbody.insertRow(-1);
-        for (let key in data[i]) {
-            let cell = row.insertCell(-1);
-            let values = Object.values(data[i][key]);
-            cell.innerHTML = values.join(' ');
+    const tbody = document.getElementById('inner-table');
+    for (const object of data) {
+        const row = tbody.insertRow(-1);
+        for (const key in object) {
+            const cell = row.insertCell(-1);
+            const values = Object.values(object[key]);
+            const text = values.join(' ');
+            cell.innerHTML = text;
         }
     }
 }
