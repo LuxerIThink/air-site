@@ -23,10 +23,13 @@ function addData2Table(data) {
 
 function generateHeader(data) {
     const parentElement = document.getElementById('empty');
+    const tableDiv = document.createElement('div');
+    parentElement.appendChild(tableDiv);
+    tableDiv.classList.add('container');
     const table = document.createElement('table');
     table.id = 'table';
     table.classList.add('table', 'text-center', 'mt-3');
-    parentElement.appendChild(table);
+    tableDiv.appendChild(table);
     const header = table.createTHead();
     const hrow = header.insertRow(0);
     for (var key in data[0]) {
