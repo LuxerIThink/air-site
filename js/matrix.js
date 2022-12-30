@@ -1,25 +1,46 @@
 generateTable();
-console.log('first')
-const inputs = document.querySelectorAll('input.btn-check');
-console.log('second')
-const ids = [];
 
+const pixels = document.getElementsByClassName('pixel');
+const redRange = document.getElementById('red');
+const greenRange = document.getElementById('green');
+const blueRange = document.getElementById('blue');
 
-inputs.forEach((input) => {
-    input.addEventListener('change', (event) => {
+const button = document.getElementById('button');
+const checks = document.getElementsByClassName('check');
+
+button.addEventListener('click', function() {
+    const data = [];
+
+    for (const check of checks) {
+        const id = check.id;
+        const [x, y] = id.split('x').map(x => parseInt(x));
+        const color = check.style.backgroundColor;
+        console.log(color)
         console.log('xD')
-        const input = event.target;
-        if (input.checked) {
-            ids.push(input.id);
-            console.log(ids)
-        } else {
-            const index = ids.indexOf(input.id);
-            ids.splice(index, 1);
-            console.log(ids)
-        }
-    });
+        const [r, g, b] = color.match(/\d+/g).map(x => parseInt(x));
+
+        data.push({ x, y, r, g, b });
+    }
+
+    console.log(JSON.stringify(data));
+    // sendRequest(data);
 });
 
+for (const pixel of pixels) {
+    pixel.addEventListener('click', function() {
+        const red = parseInt(redRange.value);
+        const green = parseInt(greenRange.value);
+        const blue = parseInt(blueRange.value);
+        pixel.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+    });
+}
+
+function sendRequest(data) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/api/submit');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(data));
+}
 
 function generateTable() {
     const parentElement = document.getElementById('empty');
@@ -36,15 +57,11 @@ function generateTable() {
             const cell = document.createElement('td');
             let check = document.createElement('input')
             const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.className = 'btn-check';
+            checkbox.type = 'button';
+            checkbox.className = 'btn check btn-dark pixel';
+            checkbox.style.backgroundColor = `rgb(0, 0, 0)`;
             checkbox.id = `${x}x${y}`;
-            checkbox.autocomplete = 'off';
-            const label = document.createElement('label');
-            label.className = 'btn check shadow-sm m-1';
-            label.htmlFor = `${x}x${y}`;
             cell.appendChild(checkbox);
-            cell.appendChild(label);
             row.appendChild(cell);
         }
         table.appendChild(row);
@@ -57,7 +74,7 @@ function generateTable() {
 
     const slidersDiv = document.createElement('div');
     centerDiv.appendChild(slidersDiv);
-    slidersDiv.classList.add('d-flex', 'flex-column');
+    slidersDiv.classList.add('d-flex', 'flex-column', 'mt-3');
 
     const colors = ['red', 'green', 'blue']
     colors.forEach((color) => {
@@ -73,4 +90,13 @@ function generateTable() {
         sliderDiv.appendChild(input);
 
     });
+    const centerDiv2 = document.createElement('div');
+    div.appendChild(centerDiv2);
+    centerDiv2.classList.add('d-flex', 'justify-content-center');
+    const button = document.createElement('button');
+    button.id = 'button';
+    button.className = 'btn btn-primary';
+    button.type = 'button';
+    button.textContent = 'Save';
+    centerDiv2.appendChild(button);
 }

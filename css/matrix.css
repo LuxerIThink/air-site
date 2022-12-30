@@ -22,7 +22,11 @@
 }
 
 .slider {
-    min-width: 360px;
+    min-width: 320px;
+}
+
+#button {
+    max-width: 100px;
 }
 
 @media (max-width: 449.98px) {
@@ -32,15 +36,5 @@
     }
     .slider {
         min-width: 300px;
-    }
-}
-
-@media (max-width: 359.98px) {
-    .check {
-        height: 1.5em;
-        width: 1.5em;
-    }
-    .slider {
-        min-width: 260px;
     }
 }
