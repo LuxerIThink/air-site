@@ -1,0 +1,46 @@
+.check {
+    height: 2.5em;
+    width: 2.5em;
+    border-color: lightgrey;
+    border-width: 1px;
+}
+
+.check:hover {
+    border-color: grey;
+}
+
+#red::-webkit-slider-thumb {
+    background-color: red;
+}
+
+#green::-webkit-slider-thumb {
+    background-color: green;
+}
+
+#blue::-webkit-slider-thumb {
+    background-color: blue;
+}
+
+.slider {
+    min-width: 360px;
+}
+
+@media (max-width: 449.98px) {
+    .check {
+        height: 2em;
+        width: 2em;
+    }
+    .slider {
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 359.98px) {
+    .check {
+        height: 1.5em;
+        width: 1.5em;
+    }
+    .slider {
+        min-width: 260px;
+    }
+}
