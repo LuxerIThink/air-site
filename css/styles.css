@@ -1,3 +1,9 @@
+
+
+.chart {
+    height: 18em;
+}
+
 .check {
     height: 2.5em;
     width: 2.5em;
@@ -29,7 +35,16 @@
     max-width: 100px;
 }
 
+@media (max-width: 575.98px) {
+    table {
+        font-size: smaller;
+    }
+}
+
 @media (max-width: 449.98px) {
+    table {
+        font-size: xx-small;
+    }
     .check {
         height: 2em;
         width: 2em;
@@ -38,3 +53,14 @@
         min-width: 300px;
     }
 }
+
+@media (min-width: 768px) {
+    #ip {
+        max-width: 130px;
+    }
+    
+    #port {
+        max-width: 70px;
+    }
+}
+
