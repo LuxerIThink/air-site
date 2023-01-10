@@ -12,10 +12,12 @@ var greenRange;
 var blueRange;
 var button;
 var checks;
-var interval;
+var interval1;
+var interval2;
 var getpathaddition = "/xD/measurements.php";
 var sendpathaddition = "/xD/led_display.php";
 var readycharts = [];
+
 
 mainLoop()
 
@@ -35,7 +37,8 @@ async function mainLoop() {
                 workingdiv.innerHTML = "";
                 startvar = 1;
                 // Set mode
-                interval = clearInterval(interval)
+                clearInterval(interval1)
+                clearInterval(interval2)
                 mode = option.id
             }
             }
@@ -47,10 +50,10 @@ async function mainLoop() {
 function modeChanger() {
     switch (mode) {
         case 'charts':
-            interval = setInterval(charts, 100);
+            interval1 = setInterval(charts, 100);
             break;
         case 'table':
-            interval = setInterval(table, 100);
+            interval2 = setInterval(table, 100);
             break;
         case 'matrix':
             matrix();
@@ -116,7 +119,7 @@ async function sendData(data) {
     console.log(prepareddata)
     let link = ip.value + ":" + port.value + sendpathaddition;
     const response = await fetch(link, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -185,7 +188,7 @@ function createChart(ctx, name, ylabel) {
             datasets: [{
                 label: name,
                 fill: false,
-                borderColor: colors.pop(),
+                borderColor: "#418CF0",
                 data: [],
             }]
         },
