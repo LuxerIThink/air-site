@@ -14,8 +14,8 @@ var button;
 var checks;
 var interval1;
 var interval2;
-var getpathaddition = "// /get_data"; // /xD/measurements.php
-var sendpathaddition = "/put_led"; // /xD/led_display.php
+var getpathaddition = "/xD/measurements.php"; // /xD/measurements.php /get_data
+var sendpathaddition = "/xD/led_display.php"; // /xD/led_display.php /put_led
 var readycharts = [];
 
 
@@ -155,7 +155,6 @@ function addData2Chart(data) {
 
 function createCharts(data) {
     const parentElement = document.getElementById("empty");
-    parentElement.classList.add('');
     const row = document.createElement('div');
     row.classList.add('row', 'gap-2', 'd-xl-flex', 'd-lg-flex', 'd-md-flex');
     for (var key in data[0]) {
