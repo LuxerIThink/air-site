@@ -14,8 +14,8 @@ var button;
 var checks;
 var interval1;
 var interval2;
-var getpathaddition = "/xD/measurements.php";
-var sendpathaddition = "/xD/led_display.php";
+var getpathaddition = "// /get_data"; // /xD/measurements.php
+var sendpathaddition = "/put_led"; // /xD/led_display.php
 var readycharts = [];
 
 
@@ -33,12 +33,12 @@ async function mainLoop() {
                 }
                 option.classList.remove('ripple');
                 option.classList.add('active');
-                // Clear working div
-                workingdiv.innerHTML = "";
-                startvar = 1;
                 // Set mode
                 clearInterval(interval1)
                 clearInterval(interval2)
+                // Clear working div
+                workingdiv.innerHTML = "";
+                startvar = 1;
                 mode = option.id
             }
             }
@@ -65,12 +65,13 @@ function modeChanger() {
 
 async function charts() {
     const data = await getData()
-    if (data != -1) {
+    if (data != -1 && mode == 'charts') {
         if (startvar == 1) {
+            startvar = 0;
             sample = 1;
             colors = ['#C7E5C3', '#82ADC2', '#7E72A8', '#D46A8F', '#F5878B', '#FFCCA1']
+            readycharts = [];
             createCharts(data)
-            startvar = 0;
         }
         else {
             addData2Chart(data)
@@ -80,18 +81,17 @@ async function charts() {
 
 async function table() {
     const data = await getData()
-    if (data != -1) {
+    if (data != -1 && mode == 'table') {
         if (startvar == 1) {
-            generateHeader(data)
             startvar = 0;
+            generateHeader(data)
         }
-        addRow(data)
+        addRow(data);
     }
 }
 
 async function matrix() {
     if (startvar == 1) {
-        startvar = 0;
         pixels = document.getElementsByClassName('pixel');
         redRange = document.getElementById('red');
         greenRange = document.getElementById('green');
@@ -99,6 +99,7 @@ async function matrix() {
         button = document.getElementById('button');
         checks = document.getElementsByClassName('check');
         generateMatrixAndSliders();
+        startvar = 0;
     }
     await ClickSendData();
     checkPixels()
@@ -154,10 +155,9 @@ function addData2Chart(data) {
 
 function createCharts(data) {
     const parentElement = document.getElementById("empty");
-    parentElement.classList.add('mt-3', 'p-4');
+    parentElement.classList.add('');
     const row = document.createElement('div');
     row.classList.add('row', 'gap-2', 'd-xl-flex', 'd-lg-flex', 'd-md-flex');
-    let count = 0
     for (var key in data[0]) {
         if (data[0][key].hasOwnProperty('value') && data[0][key].hasOwnProperty('unit')) {
             let cardDiv = document.createElement('div');

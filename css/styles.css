@@ -39,6 +39,9 @@
     table {
         font-size: smaller;
     }
+    #inner-table tr td {
+        padding: 0.1rem;
+    }
 }
 
 @media (max-width: 449.98px) {
@@ -63,4 +66,25 @@
         max-width: 70px;
     }
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: lightblue;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: lightblue;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: lightblue;
+  }
+
+  .form-control-plaintext {
+    border-width: 0;
+  }
+
+  .fa-bars {
+    font-size:20px;
+  }
 
