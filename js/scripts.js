@@ -14,8 +14,8 @@ var button;
 var checks;
 var interval1;
 var interval2;
-var getpathaddition = "/xD/measurements.php"; // /xD/measurements.php /get_data
-var sendpathaddition = "/xD/led_display.php"; // /xD/led_display.php /put_led
+var getpathaddition = "/get_data"; // /xD/measurements.php 
+var sendpathaddition = "/put_led"; // /xD/led_display.php 
 var readycharts = [];
 
 
