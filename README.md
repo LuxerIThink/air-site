@@ -25,11 +25,11 @@ Open index.html in browser or run Live Server. Then write ip and port in navbar.
 
 ## UML
 
-![Uml](./images/uml/uml.svg)
+![Uml](./images/uml/uml.drawio.svg)
 
 ## Input
 
-Json from Raspberry Pi API
+Json from Raspberry Pi API to display data
 ```
 [
   {
@@ -93,9 +93,15 @@ Json from Raspberry Pi API
 
 #### Mobile
 
-![Mobile charts](./images/mobile/charts.png | width=50) ![Mobile tables](./images/mobile/tables.png | width=50)
+<p align="middle">
+  <img src="./images/mobile/charts.png" width="49%" />
+  <img src="./images/mobile/tables.png" width="49%" />
+</p>
 
-![Mobile LEDs](./images/mobile/leds.png | width=50) ![Mobile menu](./images/mobile/menu.png | width=50)
+<p align="middle">
+  <img src="./images/mobile/leds.png" width="49%" />
+  <img src="./images/mobile/menu.png" width="49%" />
+</p>
 
 #### Tablet
 
